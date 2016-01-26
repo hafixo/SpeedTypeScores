@@ -30,7 +30,6 @@ public class ScoreController {
 
     @RequestMapping(value = "/newscore", method = RequestMethod.POST)
     public void postScore(@RequestBody Score score, HttpServletRequest req) {
-        System.out.println("POST referer URL: " + req.getHeader("referer")); // TODO: check if referer URL is acceptable? (Surge)
         scoreRepository.save(score);
     }
 }
