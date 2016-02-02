@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,15 +22,17 @@ public class ScoreController {
     @Autowired
     private ScoreRepository scoreRepository;
 
+    @CrossOrigin // allows AJAX calls from Surge
     @RequestMapping(value = "/scores", method = RequestMethod.GET)
     public List<Score> getScores() {
-        Pageable pageable = new PageRequest(0, 20, Sort.Direction.DESC, "points");
+        Pageable pageable = new PageRequest(0, 25, Sort.Direction.DESC, "points");
         Page<Score> scorePage = scoreRepository.findAll(pageable);
         return scorePage.getContent();
     }
-
+    
+    @CrossOrigin
     @RequestMapping(value = "/newscore", method = RequestMethod.POST)
-    public void postScore(@RequestBody Score score, HttpServletRequest req) {
+    public void postScore(@RequestBody Score score) {
         scoreRepository.save(score);
     }
 }
