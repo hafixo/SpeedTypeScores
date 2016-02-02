@@ -25,7 +25,7 @@ public class ScoreController {
     @CrossOrigin // allows AJAX calls from Surge
     @RequestMapping(value = "/scores", method = RequestMethod.GET)
     public List<Score> getScores() {
-        Pageable pageable = new PageRequest(0, 25, Sort.Direction.DESC, "points");
+        Pageable pageable = new PageRequest(0, 50, Sort.Direction.DESC, "points");
         Page<Score> scorePage = scoreRepository.findAll(pageable);
         return scorePage.getContent();
     }
